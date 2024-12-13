@@ -1,2 +1,2 @@
 # Redux-Beanking
-Best App to Practice Redux
+Best Redux app to practice
