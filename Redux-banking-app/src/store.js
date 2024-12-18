@@ -22,7 +22,7 @@ function reducer(state = initialState, action) {
         case 'account/payLoan':
             return {
                 ...state, 
-                loan: 0, 
+                loan: state.loan - action.payload, 
                 loanPurpose:"", 
                 balance: state.balance - action.payload
             };
@@ -43,5 +43,5 @@ console.log(store.getState());
 store.dispatch({type: "account/requestLoan", payload: { amount:1000, purpose: "Buy a car"}})
 console.log(store.getState());
 
-store.dispatch({type: "account/payLoan", payload:1000})
+store.dispatch({type: "account/payLoan", payload:100})
 console.log(store.getState());
