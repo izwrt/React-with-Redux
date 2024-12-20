@@ -1,4 +1,4 @@
-import { createStore } from 'redux';
+import { combineReducers, createStore } from 'redux';
 
 /* eslint-disable no-duplicate-case */
 const initialStateAccount = {
@@ -13,7 +13,7 @@ const initialStateCustomer = {
     createAt: "",
 };
 
-function reducer(state = initialStateAccount, action) {
+function accountReducer(state = initialStateAccount, action) {
     switch(action.type) {
         case "account/deposite":
             return {...state, balance: state.balance + action.payload}
@@ -38,7 +38,32 @@ function reducer(state = initialStateAccount, action) {
     }
 }
 
-const store = createStore(reducer);
+const customerReducer = ( state=initialStateCustomer,action ) => {
+    switch(action.type) {
+        case 'customer/createCustomer':
+            return {
+                ...state,
+                fullName: action.payload.fullName,
+                nationalId: action.payload.nationalId
+            };
+
+        case 'customer/updateName':
+            return {
+                ...state,
+                fullName: action.payload
+            };
+        
+        default: return state;
+    }
+}
+
+
+const rootReducer = combineReducers({
+    account: accountReducer,
+    customer: customerReducer
+}) 
+
+const store = createStore(rootReducer);
 
 // store.dispatch({type: "account/deposite", payload:1000});
 // console.log(store.getState());
@@ -76,9 +101,27 @@ function payLoan ( amount ) {
     }
 }
 
+
 store.dispatch(deposite(1000));
 store.dispatch(withdraw(1000));
 store.dispatch(requestLoan(1000));
 store.dispatch(payLoan(100));
 
 console.log(store.getState());
+
+function createCustomer(fullName, nationalId){
+    return {
+        type: "customer/createCustomer",
+        payload: {
+            fullName: fullName,
+            nationalId: nationalId
+        }
+    }
+}
+
+function updateName(fullName) {
+    return {
+        type: "customer/updateName",
+        payload: fullName
+    }
+}
