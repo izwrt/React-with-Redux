@@ -1,13 +1,19 @@
 import { createStore } from 'redux';
 
 /* eslint-disable no-duplicate-case */
-const initialState = {
+const initialStateAccount = {
     balance: 0,
     loan: 0,
     loanPurpose: "",
 };
 
-function reducer(state = initialState, action) {
+const initialStateCustomer = {
+    fullName: "",
+    nationalId: "",
+    createAt: "",
+};
+
+function reducer(state = initialStateAccount, action) {
     switch(action.type) {
         case "account/deposite":
             return {...state, balance: state.balance + action.payload}
