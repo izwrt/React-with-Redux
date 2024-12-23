@@ -65,6 +65,7 @@ const rootReducer = combineReducers({
 
 const store = createStore(rootReducer);
 
+
 // store.dispatch({type: "account/deposite", payload:1000});
 // console.log(store.getState());
 
@@ -108,6 +109,14 @@ store.dispatch(requestLoan(1000));
 store.dispatch(payLoan(100));
 
 console.log(store.getState());
+
+const value = store.getState();
+
+value.map(vl => vl)
+
+console.log()
+
+
 
 function createCustomer(fullName, nationalId){
     return {
