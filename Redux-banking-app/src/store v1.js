@@ -10,9 +10,6 @@ const rootReducer = combineReducers({
 }) 
 
 const store = createStore(rootReducer);
-store.dispatch({type:"account/deposite", payload: 1000})
-
-console.log(store.getState());
 
 export default store;
 
