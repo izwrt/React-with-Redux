@@ -44,7 +44,8 @@ const customerReducer = ( state=initialStateCustomer,action ) => {
             return {
                 ...state,
                 fullName: action.payload.fullName,
-                nationalId: action.payload.nationalId
+                nationalId: action.payload.nationalId,
+                createAt: action.payload.createAt
             };
 
         case 'customer/updateName':
@@ -110,11 +111,11 @@ store.dispatch(payLoan(100));
 
 console.log(store.getState());
 
-const value = store.getState();
+// const value = store.getState();
 
-value.map(vl => vl)
+// value.map(vl => vl)
 
-console.log()
+// console.log()
 
 
 
@@ -122,8 +123,7 @@ function createCustomer(fullName, nationalId){
     return {
         type: "customer/createCustomer",
         payload: {
-            fullName: fullName,
-            nationalId: nationalId
+            fullName, nationalId, createAt: new Date().toISOString
         }
     }
 }
@@ -134,3 +134,8 @@ function updateName(fullName) {
         payload: fullName
     }
 }
+
+store.dispatch(createCustomer("Ishwar", "232423"));
+console.log(store.getState());
+store.dispatch(deposite(500));
+console.log(store.getState());
