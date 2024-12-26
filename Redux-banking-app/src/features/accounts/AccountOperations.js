@@ -7,7 +7,9 @@ function AccountOperations() {
   const [loanPurpose, setLoanPurpose] = useState("");
   const [currency, setCurrency] = useState("USD");
 
-  function handleDeposit() {}
+  function handleDeposit() {
+    
+  }
 
   function handleWithdrawal() {}
 
