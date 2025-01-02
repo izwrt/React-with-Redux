@@ -31,13 +31,13 @@ export default function accountReducer(state = initialStateAccount, action) {
 }
 
 function convert(from, to, amount) {
-    fetch(`https://api.frankfurter.dev/v1/latest?base=${from}&symbols=${to}`)
+    return fetch(`https://api.frankfurter.dev/v1/latest?base=${from}&symbols=${to}`)
       .then((resp) => resp.json())
       .then((data) => {
-        return (amount * data.rates[to]).toFixed(2);
+        return (amount * data.rates[to].toFixed(2)); 
       });
-    }
-
+  }
+  
 
 export function deposite(amount, currency) {
     if(currency === 'USD')
@@ -45,7 +45,12 @@ export function deposite(amount, currency) {
         type: "account/deposite", payload:amount
     };
 
-    console.log(convert(currency, "USD", amount));
+    return async function (dispatch,getState) {
+        const res = await convert(currency, "USD", amount);
+        console.log(typeof res);
+
+        dispatch({ type: "account/deposite", payload: res});
+    }
 }
 
 export function withdraw(amount) {
