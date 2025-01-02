@@ -20,8 +20,9 @@ function AccountOperations() {
     e.preventDefault();
     if(!depositAmount) return;
 
-    dispatch(deposite(depositAmount));
-    setDepositAmount("")
+    dispatch(deposite(depositAmount, currency));
+    setDepositAmount("");
+    currency("");
   }
 
   function handleWithdrawal(e) {
@@ -29,7 +30,7 @@ function AccountOperations() {
     if(!withdrawalAmount) return;
 
     dispatch(withdraw(withdrawalAmount));
-    setWithdrawalAmount("") 
+    setWithdrawalAmount("") ;
    }
 
   function handleRequestLoan(e) {
