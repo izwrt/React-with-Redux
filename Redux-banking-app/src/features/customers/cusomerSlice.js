@@ -22,12 +22,15 @@ const customerReducer = createSlice({
                 payload: {fullName, nationalId, createAt},
             }
         }
+    },
+    updateName(state,action) {
+        state.fullName = action.payload;
     }
 }
 });
 
 export default customerReducer.reducer;
-export {}
+export const {createCustomer} = customerReducer.actions
 
 // export default function customerReducer ( state=initialStateCustomer,action ) {
 //     switch(action.type) {

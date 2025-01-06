@@ -44,7 +44,30 @@ const accountSlice = createSlice({
 
 console.log(accountSlice);
 
-export const { deposite, payLoan, requestLoan, withdraw } = accountSlice.actions;
+export const { payLoan, requestLoan, withdraw } = accountSlice.actions;
+
+function convert(from, to, amount) {
+    return fetch(`https://api.frankfurter.dev/v1/latest?base=${from}&symbols=${to}`)
+      .then((resp) => resp.json())
+      .then((data) => {
+        return (amount * data.rates[to].toFixed(2)); 
+      });
+  }
+  
+
+export function deposite(amount, currency) {
+    if(currency === 'USD')
+    return {
+        type: "account/deposite", payload:amount
+    };
+
+    return async function (dispatch,getState) {
+        const res = await convert(currency, "USD", amount);
+        console.log(typeof res);
+
+        dispatch({ type: "account/deposite", payload: res});
+    }
+}
 
 export default accountSlice.reducer;
 
